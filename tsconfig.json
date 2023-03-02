@@ -22,7 +22,8 @@
       "~/layouts": ["src/layouts"],
       "~/styles": ["src/styles"],
       "~/components": ["src/components"],
-      "~/services": ["src/services"]
+      "~/services": ["src/services"],
+      "~/contexts": ["src/contexts"],
     }
   },
   "include": ["src"],
