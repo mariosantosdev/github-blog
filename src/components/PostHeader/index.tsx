@@ -7,9 +7,26 @@ import {
   FaGithub,
 } from 'react-icons/fa'
 import { NavLink } from 'react-router-dom'
+import { formatAgoDate } from '~/utils/formatter'
 import { Container, Footer, FooterItem, Header, Title } from './styles'
 
-export const PostHeader: React.FC = () => {
+interface PostHeaderProps {
+  title: string
+  url: string
+  comments: number
+  owner: string
+  ownerProfile: string
+  createdAt: string
+}
+
+export const PostHeader: React.FC<PostHeaderProps> = ({
+  title,
+  url,
+  comments,
+  owner,
+  ownerProfile,
+  createdAt,
+}) => {
   return (
     <Container>
       <Header>
@@ -18,31 +35,27 @@ export const PostHeader: React.FC = () => {
           Voltar
         </NavLink>
 
-        <a
-          href="https://github.com/mariosantosdev"
-          target="_blank"
-          rel="noreferrer"
-        >
+        <a href={url} target="_blank" rel="noreferrer">
           VER NO GITHUB <FaExternalLinkAlt size={12} />
         </a>
       </Header>
 
-      <Title>JavaScript data types and data structures</Title>
+      <Title>{title}</Title>
 
       <Footer>
-        <FooterItem>
+        <FooterItem as={NavLink} to={ownerProfile} target="_blank">
           <FaGithub />
-          <span>mariosantosdev</span>
+          <span>{owner}</span>
         </FooterItem>
 
         <FooterItem>
           <FaCalendarDay />
-          <span>Há 1 dia</span>
+          <span>{formatAgoDate(createdAt)}</span>
         </FooterItem>
 
         <FooterItem>
           <FaComment />
-          <span>5 comentários</span>
+          <span>{comments} comentários</span>
         </FooterItem>
       </Footer>
     </Container>

@@ -86,6 +86,7 @@ export const FooterItem = styled.div`
   justify-content: center;
   gap: 0.5rem;
   color: ${({ theme }) => theme.colors['base-subtitle']};
+  text-decoration: none;
 
   svg {
     color: ${({ theme }) => theme.colors['base-label']};
