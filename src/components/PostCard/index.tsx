@@ -1,9 +1,13 @@
 import React from 'react'
 import { Container, Content, Header } from './styles'
 
-export const PostCard: React.FC = () => {
+interface PostCardProps {
+  id: number
+}
+
+export const PostCard: React.FC<PostCardProps> = ({ id }) => {
   return (
-    <Container>
+    <Container to={`/post/${id}`}>
       <Header>
         <h2>JavaScript data types and data structures</h2>
         <time>Há 1 dia</time>
