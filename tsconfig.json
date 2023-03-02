@@ -18,6 +18,8 @@
     "baseUrl": ".",
     "paths": {
       "~/*": ["src/*"],
+      "~/pages": ["src/pages"],
+      "~/layouts": ["src/layouts"],
       "~/styles": ["src/styles"],
       "~/components": ["src/components"],
       "~/services": ["src/services"]
