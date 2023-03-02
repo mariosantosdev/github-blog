@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import {
   FaBuilding,
   FaExternalLinkAlt,
   FaGithub,
   FaUserFriends,
 } from 'react-icons/fa'
+import { api } from '~/services/api'
 import {
   Container,
   Content,
@@ -15,7 +16,52 @@ import {
   Wrapper,
 } from './styles'
 
+type ProfileType = {
+  user: string
+  name: string
+  avatarUrl: string
+  url: string
+  bio: string
+  followers: number
+  company: string
+}
+
+type ProfileReponseAPI = {
+  login: string
+  name: string
+  avatar_url: string
+  url: string
+  company: string
+  bio: string
+  followers: number
+}
+
 export const Profile: React.FC = () => {
+  const [profile, setProfile] = useState<ProfileType>({
+    user: 'mariosantosdev',
+    name: 'Mário Santos',
+    avatarUrl: 'https://github.com/mariosantosdev.png',
+    url: 'https://github.com/mariosantosdev',
+    bio: '',
+    followers: 0,
+    company: 'Nenhuma',
+  })
+
+  useEffect(() => {
+    async function fetchProfile() {
+      const { data } = await api.get<ProfileReponseAPI>('/users/mariosantosdev')
+
+      setProfile((prev) => ({
+        ...prev,
+        ...data,
+        avatarUrl: data.avatar_url,
+        user: data.login,
+      }))
+    }
+
+    fetchProfile()
+  }, [])
+
   return (
     <Wrapper>
       <Container>
@@ -23,7 +69,7 @@ export const Profile: React.FC = () => {
 
         <Content>
           <Header>
-            <h1>Mário Santos</h1>
+            <h1>{profile.name}</h1>
 
             <a
               href="https://github.com/mariosantosdev"
@@ -34,27 +80,22 @@ export const Profile: React.FC = () => {
             </a>
           </Header>
 
-          <Description>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam
-            voluptates, quod, quia, voluptate quae voluptatem quibusdam quos
-            voluptatum quas natus quidem. Quisquam, quae. Quisquam, quae.
-            Quisquam,
-          </Description>
+          <Description>{profile.bio}</Description>
 
           <Footer>
             <FooterItem>
               <FaGithub />
-              <span>mariosantosdev</span>
+              <span>{profile.user}</span>
             </FooterItem>
 
             <FooterItem>
               <FaBuilding />
-              <span>Osten Moove</span>
+              <span>{profile.company}</span>
             </FooterItem>
 
             <FooterItem>
               <FaUserFriends />
-              <span>32 seguidores</span>
+              <span>{profile.followers} seguidores</span>
             </FooterItem>
           </Footer>
         </Content>
