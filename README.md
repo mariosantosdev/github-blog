@@ -15,3 +15,7 @@ The project was developed to finish an challenge steps of the course <a href="ht
 - ViteJS
 - Styled-Components
 - Axios
+- Luxon
+- React-icons
+- React-markdown
+- React-router-dom
