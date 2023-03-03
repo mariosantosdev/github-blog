@@ -27,6 +27,7 @@ export const Content = styled(ReactMarkdown)`
   pre {
     background: ${({ theme }) => theme.colors['base-post']};
     padding: 1rem;
+    overflow-x: auto;
   }
 
   @media (max-width: 47rem) {
